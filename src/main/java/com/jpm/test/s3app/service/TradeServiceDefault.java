@@ -71,6 +71,10 @@ public class TradeServiceDefault implements TradeService
     public BigDecimal calculateAllShareIndex(LocalDate localDate)
     {
         List<Trade> tradeList = tradeDao.findInDate(localDate);
+        if (tradeList.size() == 0)
+        {
+            return null;
+        }
         BigDecimal allShareIndex = BigDecimal.ONE;
         for(Trade trade: tradeList)
         {
