@@ -39,13 +39,11 @@ with both commons and preferred shares) ask for the dividend yield referred to t
 About the model, I was in doubt between introducing a value object enum `StockType` to represent `COMMON` and  
 `PREFERRED` stock with the draw-back of having the `parValue` field **nullable** to not be used in case  
 of `COMMON` stocks, or using a base common model `Stock` with the drawback that `StockCommon` is coincident with it  
-(while I did not considered at all inheriting `StockPreferred` from `StockCommon` - to dive up the `Stock base class  
--  because it sounds to me strange in the context of their financial meaning).  
+(while I did not considered at all inheriting `StockPreferred` from `StockCommon`, to give up the `Stock` base class  
+, because it sounds to me strange in the context of their financial meaning).  
 Finally I decided for the second one, but I still don't like it so much.  
 In any case, the hypothetical database table behind the stock classes would be the same,  
 with a `PAR_VALUE` nullable column, reason why someone could prefer having the model consistent with  
 the underlying table.  
-
-# NOTES
-
-There are several nice assertion libraries (e.g. `JAssert`) who however I gave up to use.  
+At the end I found that the previous choice was wrong, since to discern within `StockCommon`  
+and `StockPreferred` I had to ask for the type and furthermore, I still had the need to introduce the `StockType` enum.
